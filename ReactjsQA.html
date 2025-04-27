@@ -1,0 +1,271 @@
+*********************Basics*****************************
+
+1. What is React?
+A JavaScript library for building user interfaces, especially single-page applications.
+
+2. What are the features of React?
+Virtual DOM, component-based architecture, JSX, unidirectional data flow, fast rendering.
+
+3. What is JSX?
+JavaScript syntax extension that allows HTML-like code inside JavaScript.
+
+4. What is DOM?
+Document Object Model; it represents the page structure as nodes and objects.
+
+5. What is Virtual DOM?
+A lightweight copy of the real DOM, updated in memory first, improving performance.
+
+6. What is state in ReactJS?
+A built-in object used to store dynamic data and trigger UI updates.
+
+<strong>Objective</strong>: Understand how state is used in React to store and manage dynamic data.
+
+<strong>Counter App:</strong>
+<code>
+import React, { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+</code>
+
+
+7. What are props?
+Short for properties; props are read-only data passed from parent to child components.
+
+Objective: Understand how data is passed between components using props.
+
+import React from "react";
+
+const Greeting = ({ name, age }) => {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      <p>You are {age} years old.</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return <Greeting name="John" age={25} />;
+};
+
+export default App;
+
+
+
+8. Differences between State and Props?
+Props are passed, immutable; State is local, mutable.
+
+9. What are keys in React?
+Unique identifiers used to help React efficiently update lists of elements.
+
+Objective: Understand the importance of keys in lists to help React identify which items have changed.
+
+const fruits = ["Apple", "Banana", "Orange"];
+const FruitList = () => {
+  return (
+    <ul>
+      {fruits.map((fruit, index) => (
+        <li key={index}>{fruit}</li>
+      ))}
+    </ul>
+  );
+};
+
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0598e5466484b041057eb13a35b823b87f7a0a60
+10. What is context in React?
+A way to pass data through the component tree without manually passing props at every level.
+
+Objective: Learn how to pass data through the component tree without props drilling.
+
+Exercise:
+
+    Create a context for managing the theme (light or dark) and consume it in a child component.
+
+
+import React, { createContext, useState, useContext } from "react";
+
+// Create Context
+const ThemeContext = createContext();
+
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+  
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+const ThemeToggle = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+  return (
+    <div>
+      <h1>Current Theme: {theme}</h1>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle Theme</button>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+};
+
+export default App;
+
+
+************* Components *************************
+
+11. What is the component life cycle of a React class component?
+Mounting → Updating → Unmounting (methods like componentDidMount, componentDidUpdate, componentWillUnmount).
+
+12. What are fragments in React?
+A way to group multiple elements without adding extra nodes to the DOM (<>...</>).
+
+13. What are synthetic events in React?
+React's cross-browser wrapper around the native browser event.
+
+14. What are Pure components in React?
+Components that only re-render when their props or state change shallowly.
+
+15. What are Refs in React?
+References to directly access DOM elements or React elements.
+
+16. What is forwardRef?
+Passing a ref through a component to one of its child DOM nodes.
+
+17. What are Error boundaries?
+Components that catch JavaScript errors in their children and display a fallback UI.
+
+18. What are Higher Order Components (HOCs)?
+Functions that take a component and return a new component with enhanced behavior.
+
+19. Differences between controlled and uncontrolled components?
+Controlled components manage their state via React; uncontrolled components use the DOM.
+
+20. What are Portals in React?
+A way to render children into a DOM node outside the parent component hierarchy.
+
+21. What are render props in React?
+A technique where a component’s child is a function, allowing dynamic rendering.
+🪝 Hooks
+
+22. What is useMemo?
+Memoizes a value to avoid expensive calculations on every render.
+
+23. What is useCallback?
+Memoizes a function to prevent it from being recreated on every render.
+
+24. Differences between useMemo and useCallback?
+useMemo caches a value; useCallback caches a function.
+
+25. What are custom hooks?
+Reusable functions that start with use and share logic between components.
+
+26. What is useReducer hook?
+An alternative to useState, more suited for complex state logic.
+
+27. Which lifecycle hooks are replaced with useEffect?
+componentDidMount, componentDidUpdate, and componentWillUnmount.
+
+28. When to use useState and useReducer?
+Use useState for simple state, useReducer for complex or related state transitions.
+
+29. What are the different hooks you have used?
+Common: useState, useEffect, useContext, useMemo, useRef, useCallback, useReducer.
+
+*************Advanced Topics****************************
+
+30. Difference between package.json and package-lock.json?
+package.json manages project dependencies; package-lock.json locks dependency versions for consistency.
+
+31. Client-side vs Server-side rendering?
+Client-side: Rendered in the browser; Server-side: Rendered on the server, faster initial load.
+
+32. What is props drilling?
+Passing data through multiple levels of components manually.
+
+33. Disadvantages of props drilling and how to avoid?
+Hard to maintain; avoid with Context API or state management libraries.
+
+34. What is Lazy loading in React?
+Loading components only when needed, improving performance.
+
+35. What is Suspense in React?
+A component that waits for something (like lazy-loaded components) before rendering fallback UI.
+
+36. Example of Context API usage?
+Provide a theme or user authentication data throughout the app.
+
+37. Context API vs Redux?
+Context is simpler for small apps; Redux is more scalable for large applications.
+
+38. PropTypes in React?
+Library for validating types of props passed to components.
+
+39. Differences between createElement and cloneElement?
+createElement creates a new element; cloneElement clones an existing one and can modify its props.
+
+40. What are protected routes in React?
+Routes that require user authentication to access.
+
+41. What is react-router has context menu?
+React Router uses context internally to provide navigation features across the app.
+🛠️ Practical Questions
+
+42. Purpose of callback function as an argument of setState()?
+To ensure the state is updated based on previous state reliably.
+
+43. Create a custom hook for increment/decrement counter?
+Use useState internally in a hook returning increment and decrement functions.
+
+44. How to send data from child to parent using callback functions?
+Pass a function from parent to child, then call it inside the child with data.
+
+45. How to send data from child component to parent using useRef?
+Assign refs in parent, and child updates it directly.
+
+46. How do you optimize your React application?
+Code splitting, memoization, lazy loading, avoiding unnecessary renders.
+
+47. How would you consume a RESTful JSON API in ReactJS?
+Using fetch or axios inside a useEffect hook.
+
+******************Miscellaneous**********************
+
+48. What is Strict Mode in React?
+A tool for highlighting potential problems in an application.
+
+49. Ways to pass data from child to parent in React?
+Callback functions, lifting state up, refs.
+
+50. Different design patterns used in React?
+HOCs, Render Props, Compound Components, Hooks Pattern.
+
+51. What are React Mixins?
+Deprecated technique for sharing behavior between components, replaced by HOCs and hooks.
+
+52. What are the different types of exports and imports?
+Named exports/imports and default exports/imports.
+
+
