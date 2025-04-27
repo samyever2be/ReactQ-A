@@ -18,8 +18,50 @@ A lightweight copy of the real DOM, updated in memory first, improving performan
 6. What is state in ReactJS?
 A built-in object used to store dynamic data and trigger UI updates.
 
+Objective: Understand how state is used in React to store and manage dynamic data.
+
+Counter App:
+
+import React, { useState } from "react";
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+  
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+      <button onClick={() => setCount(count - 1)}>Decrement</button>
+    </div>
+  );
+};
+
+export default Counter;
+
+
 7. What are props?
 Short for properties; props are read-only data passed from parent to child components.
+
+Objective: Understand how data is passed between components using props.
+
+import React from "react";
+
+const Greeting = ({ name, age }) => {
+  return (
+    <div>
+      <h1>Hello, {name}!</h1>
+      <p>You are {age} years old.</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return <Greeting name="John" age={25} />;
+};
+
+export default App;
+
+
 
 8. Differences between State and Props?
 Props are passed, immutable; State is local, mutable.
@@ -27,8 +69,65 @@ Props are passed, immutable; State is local, mutable.
 9. What are keys in React?
 Unique identifiers used to help React efficiently update lists of elements.
 
+Objective: Understand the importance of keys in lists to help React identify which items have changed.
+
+const fruits = ["Apple", "Banana", "Orange"];
+const FruitList = () => {
+  return (
+    <ul>
+      {fruits.map((fruit, index) => (
+        <li key={index}>{fruit}</li>
+      ))}
+    </ul>
+  );
+};
+
+
 10. What is context in React?
 A way to pass data through the component tree without manually passing props at every level.
+
+Objective: Learn how to pass data through the component tree without props drilling.
+
+Exercise:
+
+    Create a context for managing the theme (light or dark) and consume it in a child component.
+
+
+import React, { createContext, useState, useContext } from "react";
+
+// Create Context
+const ThemeContext = createContext();
+
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState("light");
+  
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+
+const ThemeToggle = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+  return (
+    <div>
+      <h1>Current Theme: {theme}</h1>
+      <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>Toggle Theme</button>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeProvider>
+      <ThemeToggle />
+    </ThemeProvider>
+  );
+};
+
+export default App;
+
 
 ************* Components *************************
 
@@ -163,3 +262,5 @@ Deprecated technique for sharing behavior between components, replaced by HOCs a
 
 52. What are the different types of exports and imports?
 Named exports/imports and default exports/imports.
+
+
