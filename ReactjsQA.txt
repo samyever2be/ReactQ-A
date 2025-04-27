@@ -27,6 +27,19 @@ Props are passed, immutable; State is local, mutable.
 9. What are keys in React?
 Unique identifiers used to help React efficiently update lists of elements.
 
+Objective: Understand the importance of keys in lists to help React identify which items have changed.
+
+const fruits = ["Apple", "Banana", "Orange"];
+const FruitList = () => {
+  return (
+    <ul>
+      {fruits.map((fruit, index) => (
+        <li key={index}>{fruit}</li>
+      ))}
+    </ul>
+  );
+};
+
 10. What is context in React?
 A way to pass data through the component tree without manually passing props at every level.
 
