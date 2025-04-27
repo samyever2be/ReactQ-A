@@ -82,7 +82,10 @@ const FruitList = () => {
   );
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0598e5466484b041057eb13a35b823b87f7a0a60
 10. What is context in React?
 A way to pass data through the component tree without manually passing props at every level.
 
